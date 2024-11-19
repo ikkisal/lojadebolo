@@ -30,7 +30,7 @@ const Login = () => {
         </FloatingLabel>
 
         {/* Botao pra enviar o formulário */}
-        <Button variant="light" className="mt-4" size="lg">
+        <Button variant="light" className="mt-4" size="lg" href="/home">
           Login
         </Button>
       </Container>
