@@ -1,6 +1,9 @@
 import React from 'react'
 import CardProduto from '../components/CardProduto'
 
+//Importação de componentes
+import NavBar from '../components/NavBar';
+
 const Home = () => {
   const produtos = [
     {id: 1, 
@@ -28,6 +31,7 @@ const Home = () => {
 
   return (
     <div>
+      <NavBar />
       <h1>Lista de Produtos</h1>
       <div className='lista-produtos d-flex col-12 gap-3 mt-3 justify-content-center flex-wrap'>
 
