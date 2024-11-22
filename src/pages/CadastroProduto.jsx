@@ -10,6 +10,7 @@ import Image from 'react-bootstrap/Image';
 
 //Importação de componentes
 import NavBar from '../components/NavBar';
+import { useState } from "react";
 
 const CadastroProduto = () => {
 
@@ -27,6 +28,44 @@ const CadastroProduto = () => {
 
     //Link produto sem imagem
     const linkImagem = "https://multilit.com.br/wp-content/uploads/2020/03/Produto-sem-foto.png"
+
+    //Variaveis para o produto
+
+    const [nome, setNome] = useState("")
+    const [descricao, setDescricao] = useState("")
+    const [categoria, setCategoria] = useState("")
+    const [preco, setPreco] = useState("")
+    const [imagem, setImagem] = useState("")
+
+    //Variaves para o alerta
+
+    const[alertClass, setAlertClass] = useState("mb-3 d-done");
+    const[alertMensagem, setAlertMensagem] = useState("");
+    const[alertVariant, setAlertVariant] = useState("danger");
+
+    //Função para lidar com recarregamento da pagina
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      if(nome != ""){
+        if(descricao != ""){
+          if(preco != ""){
+
+          }
+          else{
+            setAlertClass("mb -3 mt-2")
+            setAlertMensagem("O campo não pode estar vazio")
+          }
+        }else{
+          setAlertClass("mb -3 mt-2")
+          setAlertMensagem("O campo não pode estar vazio")
+        }
+      }else{
+        setAlertClass("mb -3 mt-2")
+        setAlertMensagem("O campo não pode estar vazio")
+      }
+    }
 
   return (
     <div>
@@ -104,9 +143,9 @@ const CadastroProduto = () => {
                 </Col>
             </Row>
 
-            {/* Alerta caso haja erro */}
-            <Alert key="danger" variant="danger">
-                 Há um erro
+          {/* Alerta caso haja erro */}
+        <Alert variant={alertVariant} className={alertClass}>
+                 {alertMensagem}
             </Alert>
 
             {/* Botão para enviar formulário */}
