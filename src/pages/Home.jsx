@@ -4,29 +4,30 @@ import CardProduto from '../components/CardProduto'
 //Importação de componentes
 import NavBar from '../components/NavBar';
 
+// importar o hook useState para monitorar a mudança das variaveis
+import { useState, useEffect } from "react";
+
+//URL da API
+const url = "http://localhost:5000/produtos"
+
 const Home = () => {
-  const produtos = [
-    {id: 1, 
-      nome:"Shampoo", 
-      descricao:"Não Pode Comer", 
-      preco:"7,50", 
-      categoria:"Saúde e Beleza", 
-      imagemUrl:"https://m.media-amazon.com/images/I/81YvIkHie-L.jpg"},
+  const [produtos, setProdutos] = useState([])
 
-    {id: 2, 
-      nome:"Batedeira mágica", 
-      descricao:"Faz tudo o que você quiser.", 
-      preco:"449,90", 
-      categoria:"Eletrõnicos",
-      imagemUrl:"https://m.media-amazon.com/images/I/71a-aiH-n+L.jpg"},
-
-    {id: 3, 
-      nome:"Lancheira Carlos", 
-      descricao:"Você é a velocidade", 
-      preco:"11,50", 
-      categoria:"Bolsa", 
-      imagemUrl:"https://lojabagaggio.vtexassets.com/arquivos/ids/2323583/0152511651001---LANCHEIRA-CARROS-23K--1-.jpg?v=638049795743100000"}
-  ]
+  // useEffect pra puxar os dados da api
+  useEffect(() =>{
+    async function fetchData(){
+      try{
+        const req = await fetch(url)
+        const prods = await req.json()
+        console.log(prods)
+        setProdutos(prods)
+      }
+      catch(erro){
+        console.log(erro.message)
+      }
+    }
+    fetchData()
+  }, [produtos])
 
 
   return (

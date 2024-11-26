@@ -10,21 +10,29 @@ import Image from 'react-bootstrap/Image';
 
 //Importação de componentes
 import NavBar from '../components/NavBar';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const urlCate = "http://localhost:5000/cats"
+const urlProd = "http://localhost:5000/produtos"
 
 const CadastroProduto = () => {
 
 //Lista com categorias
-    const cats = [
-        {"id": 1, "nome": "Eletrônicos"},
-        {"id": 2, "nome": "Moda e Vestuário"},
-        {"id": 3, "nome": "Alimentos e Bebidas"},
-        {"id": 4, "nome": "Saúde e Beleza"},
-        {"id": 5, "nome": "Esportes e Lazer"},
-        {"id": 6, "nome": "Brinquedos e Jogos"},
-        {"id": 6, "nome": "Livros e Papelaria"},
-    ]
-
+    const [cats, setCategorias] = useState([]);
+    useEffect(() =>{
+      async function fetchData(){
+        try{
+          const req = await fetch(urlCate)
+          const cats = await req.json()
+          console.log(cats)
+          setCategorias(cats)
+        }
+        catch(erro){
+          console.log(erro.message)
+        }
+      }
+      fetchData()
+    }, [])
 
     //Link produto sem imagem
     const linkImagem = "https://multilit.com.br/wp-content/uploads/2020/03/Produto-sem-foto.png"
@@ -35,7 +43,7 @@ const CadastroProduto = () => {
     const [descricao, setDescricao] = useState("")
     const [categoria, setCategoria] = useState("")
     const [preco, setPreco] = useState("")
-    const [imagem, setImagem] = useState("")
+    const [imagemUrl, setImagemUrl] = useState("")
 
     //Variaves para o alerta
 
@@ -51,19 +59,36 @@ const CadastroProduto = () => {
       if(nome != ""){
         if(descricao != ""){
           if(preco != ""){
-
+            const produto = {nome, descricao, categoria, preco, imagemUrl};
+            console.log(produto);
+            try{
+              const req = await fetch(urlProd, {
+                method:"POST",
+                headers: {"Content-type": "application/json"},
+                body:JSON.stringify(produto),
+              });
+              const res = req.json()
+              console.log(res);
+              setAlertClass("mb-3 mt-2");
+              setAlertVariant("sucess");
+              setAlertMensagem("Produto cadastrado com sucesso");
+              alert("Produto efetuado com sucesso")
+            }
+            catch(error){
+              console.log(error)
+            }
           }
           else{
             setAlertClass("mb -3 mt-2")
-            setAlertMensagem("O campo não pode estar vazio")
+            setAlertMensagem("O campo do preço não pode estar vazio")
           }
         }else{
           setAlertClass("mb -3 mt-2")
-          setAlertMensagem("O campo não pode estar vazio")
+          setAlertMensagem("O campo descrição não pode estar vazio")
         }
       }else{
         setAlertClass("mb -3 mt-2")
-        setAlertMensagem("O campo não pode estar vazio")
+        setAlertMensagem("O campo nome não pode estar vazio")
       }
     }
 
@@ -72,7 +97,7 @@ const CadastroProduto = () => {
       <NavBar />
       <Container>
         <h1>Cadastrar Produtos</h1>
-        <form className="mt-3">
+        <form className="mt-3" onSubmit={handleSubmit}>
             <Row>
                 <Col xs={6}>
 
@@ -83,7 +108,10 @@ const CadastroProduto = () => {
                     className="mb-3">
 
                     <Form.Control type="text" 
-                    placeholder="Digite o nome do produto" />
+                    placeholder="Digite o nome do produto" 
+                    value={nome}
+                    onChange={(e) => setNome(e.target.value)}
+                    />
                     </FloatingLabel>
 
                     {/* Caixa de descrição */}
@@ -93,7 +121,10 @@ const CadastroProduto = () => {
                     className="mb-3">
 
                     <Form.Control type="text" 
-                    placeholder="Digite a descrição do produto" />
+                    placeholder="Digite a descrição do produto" 
+                    value={descricao}
+                    onChange={(e) => setDescricao(e.target.value)}
+                    />
                     </FloatingLabel>
 
 
@@ -102,7 +133,10 @@ const CadastroProduto = () => {
                     controlId="formGridState" 
                     className="mb-3">
                         <Form.Label>Tipo de Produto</Form.Label>
-                        <Form.Select>
+                        <Form.Select 
+                        value={categoria}
+                        onChange={(e) => setCategoria(e.target.value)}
+                        >
 
                            {cats.map((cat)=>(
                             <option key={cat.id} value={cat.nome}>
@@ -121,7 +155,10 @@ const CadastroProduto = () => {
                      <Form.Control 
                         type="number"
                         step={0.1} 
-                        placeholder="Digite o nome do produto" />
+                        placeholder="Digite o nome do produto" 
+                        value={preco}
+                        onChange={(e) => setPreco(e.target.value)}
+                        />
                     </FloatingLabel>
 
         
@@ -134,11 +171,20 @@ const CadastroProduto = () => {
                     label="Envie o link da imagem do produto" 
                     className="mb-3">
 
-                    <Form.Control type="text" 
-                    placeholder="Envie o link da imagem do produto" />
+                    <Form.Control 
+                    type="text" 
+                    placeholder="Envie o link da imagem do produto" 
+                    value={imagemUrl}
+                    onChange={(e) => {
+                      setImagemUrl(e.target.value)
+                    }}
+                    />
                     </FloatingLabel>
 
-                    <Image src={linkImagem} rounded width={300} height={300}/>
+                    <Image 
+                      src={imagemUrl == "" ? linkImagem : imagemUrl} 
+                      rounded width={300} 
+                      height={300}/>
                 </Form.Group>
                 </Col>
             </Row>

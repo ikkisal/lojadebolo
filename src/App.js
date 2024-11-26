@@ -22,7 +22,7 @@ function App() {
           <Route path="/" element={<Login/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/home" element={<Home/>}/>
-          <Route path="/produto/cadastrar" element={<CadastroProduto/>}/>
+          <Route path="/produto/cadastro" element={<CadastroProduto/>}/>
           <Route path="/produto/editar/:id" element={<EditarProduto/>}/>
         </Routes>
       </BrowserRouter>
