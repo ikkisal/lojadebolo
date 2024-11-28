@@ -11,17 +11,22 @@ import Image from 'react-bootstrap/Image';
 //Importação de componentes
 import NavBar from '../components/NavBar';
 
+// Importção do useState e useEffect
+import { useState, useEffect } from "react";
+
+// importação do Navigate
+import {useNavigate} from "react-router-dom"
+
+const url = "http://localhost:5000/cats";
+
 const EditarProduto = () => {
 
     //Lista com categorias
     const cats = [
-        {"id": 1, "nome": "Eletrônicos"},
-        {"id": 2, "nome": "Moda e Vestuário"},
-        {"id": 3, "nome": "Alimentos e Bebidas"},
-        {"id": 4, "nome": "Saúde e Beleza"},
-        {"id": 5, "nome": "Esportes e Lazer"},
-        {"id": 6, "nome": "Brinquedos e Jogos"},
-        {"id": 6, "nome": "Livros e Papelaria"},
+        {"id": 1, "nome": "Bolos"},
+        {"id": 2, "nome": "Doces"},
+        {"id": 3, "nome": "Bebidas"},
+        {"id": 4, "nome": "Tortas"},
     ]
 
 
@@ -110,7 +115,7 @@ const EditarProduto = () => {
             </Alert>
 
             {/* Botão para enviar formulário */}
-            <Button variant="primary" size="lg" type="submit">
+            <Button variant="warning" size="lg" type="submit">
                     Editar       
             </Button>
         </form>

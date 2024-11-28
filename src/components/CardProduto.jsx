@@ -37,7 +37,7 @@ function CardProduto(props) {
           <b>Categoria:</b> <br></br> {props.categoria}
         </Card.Text>
 
-        <Card.Link href='/home'>
+        <Card.Link href={`/produto/editar/${props.id}`}>
         <Button variant="warning">Editar</Button>
         </Card.Link>
 

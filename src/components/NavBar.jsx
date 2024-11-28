@@ -5,13 +5,13 @@ import Navbar from 'react-bootstrap/Navbar';
 function NavBar() {
   return (
     <div>
-      <Navbar expand="lg" bg="success" data-bs-theme="dark">
+      <Navbar expand="lg" style={{backgroundColor:"#cbffef"}} data-bs-theme="black">
         <Container>
-        <span className='material-symbols-outlined' style={{fontSize: "40px", color: "white"}}>
-            store
+        <span className='material-symbols-outlined' style={{fontSize: "40px", color: "black"}}>
+            cake
         </span>
         {/* Texto logo */}
-          <Navbar.Brand href="/home">Genérico Supermercados</Navbar.Brand>
+          <Navbar.Brand href="/home">Enfo Bolos</Navbar.Brand>
 
           <Navbar.Toggle aria-controls='minha-nav'/>
           <Navbar.Collapse id='minha-nav'>
@@ -19,7 +19,9 @@ function NavBar() {
             {/* Paginas */}
           <Nav className="me-auto">
             <Nav.Link href="/home" className='active'>Produtos</Nav.Link>
-            <Nav.Link href="/produto/cadastro">Cadastro</Nav.Link>
+            <Nav.Link href="/produto/cadastro">Cadastrar Produtos</Nav.Link>
+            <Nav.Link href="/produto/editar/2">Editar Produtos</Nav.Link>
+            <Nav.Link href="/produto/cadastro">Criar Novo Usuário</Nav.Link>
          </Nav>
             {/* Sair */}
 

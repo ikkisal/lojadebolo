@@ -37,13 +37,13 @@ const Home = () => {
       <div className='lista-produtos d-flex col-12 gap-3 mt-3 justify-content-center flex-wrap'>
 
         {/* Card com informações fixas */}
-        <CardProduto 
+        {/* <CardProduto 
         id="1" nome="Shampoo" 
         descricao="Não Pode Comer" 
         preco="7,50"
         categoria="Saúde e Beleza" 
         imagemUrl="https://m.media-amazon.com/images/I/81YvIkHie-L.jpg"
-        />
+        /> */}
         
         {/* Card com informações variaveis */}
         {produtos.map((prod)=>

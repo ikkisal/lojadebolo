@@ -96,15 +96,17 @@ const Login = () => {
   return (
     <div>
       <Container
-        style={{ backgroundColor: "lightblue", height: "100vh" }}
+        style={{ backgroundColor: "#ffcbdb", height: "100vh" }}
         className="justify-content-center align-content-center"
       >
         {/* icone de Login */}
         <span
-          style={{ fontSize: "200px", color: "purple" }}
+          style={{ fontSize: "200px", color: "black" }}
           className="material-symbols-outlined"
         >
           login
+          <br />
+          <h1 fontSize="20px">Enfo Bolos</h1>
         </span>
         <Form style={{width: "75%", margin: "auto"}} onSubmit ={handleLogin} >
         {/* Caixinha de email */}

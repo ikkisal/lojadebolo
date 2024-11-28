@@ -2,41 +2,19 @@
   "usuarios": [
     {
       "id": "1",
-      "nome": "Zaza",
-      "email": "zaza@hotmail.com",
-      "senha": "grogas"
-    },
-    {
-      "id": "2",
-      "nome": "Zaza",
-      "email": "zaza@hotmail.com",
-      "senha": "grogas"
+      "nome": "Jones",
+      "email": "docemel@sodoce.com.br",
+      "senha": "brigadeiro123"
     }
   ],
   "produtos": [
     {
       "id": "2",
-      "nome": "Batedeira mágica",
-      "descricao": "Faz tudo o que você quiser.",
-      "preco": "449,90",
-      "categoria": "Eletrõnicos",
-      "imagemUrl": "https://m.media-amazon.com/images/I/71a-aiH-n+L.jpg"
-    },
-    {
-      "id": "581d",
-      "nome": "Paraguaio",
-      "descricao": "Paraguaio",
-      "categoria": "",
-      "preco": "6",
-      "imagemUrl": "https://img.freepik.com/fotos-premium/pequeno-papagaio-de-estimacao-mini-laranja-em-uma-prancha-de-madeira_39408-2261.jpg"
-    },
-    {
-      "id": "a5b3",
-      "nome": "Tinta de Lula",
-      "descricao": "Tinta de Lula",
-      "categoria": "Alimentos e Bebidas",
-      "preco": "75",
-      "imagemUrl": "https://m.media-amazon.com/images/I/81eQGcUlzIL._AC_UF894,1000_QL80_.jpg"
+      "nome": "Bolo de bosta",
+      "descricao": "Bolo de bosta",
+      "preco": "50,00",
+      "categoria": "Bolo de bosta",
+      "imagemUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQODIsiFe4rapi512LVFQ8ul8cvwLAdI4VwBA&s"
     }
   ],
   "cats": [
