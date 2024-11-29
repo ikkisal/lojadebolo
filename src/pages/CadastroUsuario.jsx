@@ -12,42 +12,24 @@ import Image from "react-bootstrap/Image";
 import NavBarra from "../components/NavBar";
 
 // Importando o hook useState para monitorar a mudança das variáveis
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 //Importação do navigate pra transitar entre páginas
 import { useNavigate } from "react-router-dom";
 
 // Url da api
-const urlCate = "http://localhost:5000/cats";
-const urlProd = "http://localhost:5000/produtos";
+const urlUser = 'http://localhost:5000/usuarios'
 
-const CadastroProduto = () => {
-  //Lista com categorias
-  const [cats, setCategorias] = useState([]);
-  //UseEffect pra puxar os dados da api
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const req = await fetch(urlCate);
-        const cate = await req.json();
-        console.log(cate);
-        setCategorias(cate);
-      } catch (erro) {
-        console.log(erro.message);
-      }
-    }
-    fetchData();
-  }, []);
-
+const CadastroUsuario = () => {
+  
   //Link produto sem imagem
   const linkImagem =
-    "https://www.malhariapradense.com.br/wp-content/uploads/2017/08/produto-sem-imagem.png";
+    "https://saae.lucasdorioverde.mt.gov.br/arquivos/setores/sem_imagem_avatar.png";
 
   //Variáveis para o produto
   const [nome, setNome] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [categoria, setCategoria] = useState("Eletrônicos");
-  const [preco, setPreco] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
   const [imagemUrl, setImagemUrl] = useState("");
 
   //Variáveis para o alerta
@@ -64,47 +46,47 @@ const CadastroProduto = () => {
     e.preventDefault();
 
     if (nome != "") {
-      if (descricao != "") {
-        if (preco != "") {
-          const produto = { nome, descricao, categoria, preco, imagemUrl };
-          console.log(produto);
+      if (email != "") {
+        if (senha != "") {
+          const usuario = { nome, email, senha, imagemUrl };
+          console.log(usuario);
           try {
-            const req = await fetch(urlProd, {
+            const req = await fetch(urlUser, {
               method: "POST",
               headers: { "Content-type": "application/json" },
-              body: JSON.stringify(produto),
+              body: JSON.stringify(usuario),
             });
             const res = req.json();
             console.log(res);
             setAlertClass("mb-3 mt-2");
             setAlertVariant("success");
-            setAlertMensagem("Produto cadastrado com sucesso");
-            alert("Produto cadastrado com sucesso");
+            setAlertMensagem("Usuário cadastrado com sucesso");
+            alert("Usuário cadastrado com sucesso");
             // navigate("/home");
           } 
           catch (error) {
             console.log(error);
           }
         } 
-        else {
+            else {
+            setAlertClass("mb-3 mt-2");
+            setAlertMensagem("O campo nome não pode ser vazio");
+          }
+        } else {
           setAlertClass("mb-3 mt-2");
-          setAlertMensagem("O campo preço não pode ser vazio");
+          setAlertMensagem("O campo email não pode ser vazio");
         }
       } else {
         setAlertClass("mb-3 mt-2");
-        setAlertMensagem("O campo descrição não pode ser vazio");
+        setAlertMensagem("O campo senha não pode ser vazio");
       }
-    } else {
-      setAlertClass("mb-3 mt-2");
-      setAlertMensagem("O campo nome não pode ser vazio");
-    }
-  };
+    };
 
   return (
     <div>
       <NavBarra />
       <Container>
-        <h1>Cadastrar Produtos</h1>
+        <h1>Cadastrar Usuários</h1>
         <form className="mt-3" onSubmit={handleSubmit}>
           <Row>
             <Col xs={6}>
@@ -116,7 +98,7 @@ const CadastroProduto = () => {
               >
                 <Form.Control
                   type="text"
-                  placeholder="Digite o nome do produto"
+                  placeholder="Digite o nome do usuário"
                   value={nome}
                   onChange={(e) => {
                     setNome(e.target.value);
@@ -124,67 +106,49 @@ const CadastroProduto = () => {
                 />
               </FloatingLabel>
 
-              {/* Caixinha de descrição */}
+              {/* Caixinha de email */}
               <FloatingLabel
-                controlId="floatingInputDescricao"
-                label="Descrição"
+                controlId="floatingInputEmail"
+                label="Email"
                 className="mb-3"
               >
                 <Form.Control
                   type="text"
-                  placeholder="Digite a descrição do produto"
-                  value={descricao}
+                  placeholder="Digite o email do usuário"
+                  value={email}
                   onChange={(e) => {
-                    setDescricao(e.target.value);
+                    setEmail(e.target.value);
                   }}
                 />
               </FloatingLabel>
 
-              {/* Select de categorias */}
-              <Form.Group controlId="formGridTipo" className="mb-3">
-                <Form.Label>Tipo de produto</Form.Label>
-                <Form.Select
-                  value={categoria}
-                  onChange={(e) => {
-                    setCategoria(e.target.value);
-                  }}
-                >
-                  {cats.map((cat) => (
-                    <option key={cat.id} value={cat.nome}>
-                      {cat.nome}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-
-              {/* Caixinha de preço */}
               <FloatingLabel
-                controlId="floatingInputPreco"
-                label="Preço"
+                controlId="floatingInputSenha"
+                label="Senha"
                 className="mb-3"
               >
                 <Form.Control
-                  type="number"
-                  step="0.1"
-                  placeholder="Digite o preco"
-                  value={preco}
+                  type="password"
+                  placeholder="Digite a senha do usuário"
+                  value={senha}
                   onChange={(e) => {
-                    setPreco(e.target.value);
+                    setSenha(e.target.value);
                   }}
                 />
               </FloatingLabel>
+              
             </Col>
             <Col xs={6}>
               <Form.Group controlId="formFileLg" className="mb-3">
                 {/* Caixinha de imagem */}
                 <FloatingLabel
                   controlId="floatingInputImagem"
-                  label="Envie o link da imagem do produto"
+                  label="Envie o link da imagem do usuário"
                   className="mb-3"
                 >
                   <Form.Control
                     type="text"
-                    placeholder="Envie o link da imagem do produto"
+                    placeholder="Envie o link da imagem do usuário"
                     value={imagemUrl}
                     onChange={(e) => {
                       setImagemUrl(e.target.value);
@@ -217,4 +181,4 @@ const CadastroProduto = () => {
   );
 };
 
-export default CadastroProduto;
+export default CadastroUsuario;

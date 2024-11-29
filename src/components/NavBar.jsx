@@ -20,8 +20,7 @@ function NavBar() {
           <Nav className="me-auto">
             <Nav.Link href="/home" className='active'>Produtos</Nav.Link>
             <Nav.Link href="/produto/cadastro">Cadastrar Produtos</Nav.Link>
-            <Nav.Link href="/produto/editar/2">Editar Produtos</Nav.Link>
-            <Nav.Link href="/produto/cadastro">Criar Novo Usuário</Nav.Link>
+            <Nav.Link href="/cadastroUsuario">Criar Novo Usuário</Nav.Link>
          </Nav>
             {/* Sair */}
 
